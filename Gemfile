@@ -6,6 +6,17 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'haml-rails'
+
+group :development, :test do
+  gem 'jquery-rails'
+  gem 'nifty-generators'
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'spork'
+  gem 'launchy'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
