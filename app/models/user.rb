@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 4, :allow_blank => true
 
   has_many :tweets
+  has_many :followers, :class_name => "Follow", :foreign_key => "user_id"
+  has_many :following, :class_name => "Follow", :foreign_key => "follower_id"
 
   # login can be either username or email address
   def self.authenticate(login, pass)

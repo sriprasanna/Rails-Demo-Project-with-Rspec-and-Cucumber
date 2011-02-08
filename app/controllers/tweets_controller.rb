@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_filter :login_required
   def index
     @tweets = Tweet.all
   end
@@ -18,20 +19,6 @@ class TweetsController < ApplicationController
       redirect_to @tweet
     else
       render :action => 'new'
-    end
-  end
-
-  def edit
-    @tweet = Tweet.find(params[:id])
-  end
-
-  def update
-    @tweet = Tweet.find(params[:id])
-    if @tweet.update_attributes(params[:tweet])
-      flash[:notice] = "Successfully updated tweet."
-      redirect_to tweet_url
-    else
-      render :action => 'edit'
     end
   end
 

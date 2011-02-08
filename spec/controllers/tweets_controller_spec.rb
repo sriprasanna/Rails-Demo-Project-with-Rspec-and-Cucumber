@@ -4,6 +4,10 @@ describe TweetsController do
   fixtures :all
   render_views
 
+  before(:each) do
+    @controller.stubs(:current_user).returns(User.new)
+  end
+
   it "index action should render index template" do
     get :index
     response.should render_template(:index)
@@ -28,23 +32,6 @@ describe TweetsController do
   it "create action should redirect when model is valid" do
     Tweet.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(tweet_url(assigns[:tweet]))
-  end
-
-  it "edit action should render edit template" do
-    get :edit, :id => Tweet.first
-    response.should render_template(:edit)
-  end
-
-  it "update action should render edit template when model is invalid" do
-    Tweet.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Tweet.first
-    response.should render_template(:edit)
-  end
-
-  it "update action should redirect when model is valid" do
-    Tweet.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Tweet.first
     response.should redirect_to(tweet_url(assigns[:tweet]))
   end
 
