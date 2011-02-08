@@ -1,0 +1,6 @@
+class Tweet < ActiveRecord::Base
+    belongs_to :user
+
+    validates :user, :presence => true
+    validates :text, :length => 1..140 
+end
