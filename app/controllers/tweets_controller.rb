@@ -1,14 +1,6 @@
 class TweetsController < ApplicationController
   before_filter :login_required
 
-  def show
-    @tweet = Tweet.find(params[:id])
-  end
-
-  def new
-    @tweet = Tweet.new
-  end
-
   def create
     @tweet = Tweet.new(params[:tweet])
     @tweet.user = current_user

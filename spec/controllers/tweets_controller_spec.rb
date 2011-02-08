@@ -9,26 +9,10 @@ describe TweetsController do
     @controller.stubs(:current_user).returns(@user)
   end
 
-  it "show action should render show template" do
-    get :show, :id => Tweet.first
-    response.should render_template(:show)
-  end
-
-  it "new action should render new template" do
-    get :new
-    response.should render_template(:new)
-  end
-
-  it "create action should render new template when model is invalid" do
-    Tweet.any_instance.stubs(:valid?).returns(false)
-    post :create
-    response.should render_template(:new)
-  end
-
   it "create action should redirect when model is valid" do
     Tweet.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(tweet_url(assigns[:tweet]))
+    response.should redirect_to(root_path)
   end
 
 
