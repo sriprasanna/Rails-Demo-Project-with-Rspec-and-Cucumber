@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create]
+  
+  def index
+    @tweets = Tweet.where(:user_id => [current_user.id] + current_user.following.collect(&:user_id)).paginate(:page => params[:page]) 
+  end
 
   def new
     @user = User.new
@@ -28,5 +32,20 @@ class UsersController < ApplicationController
     else
       render :action => 'edit'
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @tweets = @user.tweets.paginate(:page => params[:page])
+  end
+
+  def toggle_follow
+    where = {:user_id => params[:id], :follower_id => current_user.id}
+    if follow = Follow.where(where).first
+      follow.destroy
+    else
+      follow = Follow.create!(where)
+    end
+    redirect_to follow.user 
   end
 end

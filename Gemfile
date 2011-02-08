@@ -7,6 +7,7 @@ gem 'rails', '3.0.3'
 
 gem 'pg'
 gem 'haml-rails'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'jquery-rails'
@@ -16,6 +17,7 @@ group :development, :test do
   gem 'capybara'
   gem 'spork'
   gem 'launchy'
+  gem 'rcov'
 end
 
 # Use unicorn as the web server

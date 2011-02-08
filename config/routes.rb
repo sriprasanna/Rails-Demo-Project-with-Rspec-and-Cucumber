@@ -1,4 +1,5 @@
 TwitterClone::Application.routes.draw do
+  root :to => "users#index"
   resources :tweets
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
@@ -11,7 +12,11 @@ TwitterClone::Application.routes.draw do
 
   resources :sessions
 
-  resources :users
+  resources :users do
+    member do
+      get :toggle_follow
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

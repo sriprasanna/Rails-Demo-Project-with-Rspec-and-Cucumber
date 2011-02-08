@@ -5,12 +5,8 @@ describe TweetsController do
   render_views
 
   before(:each) do
-    @controller.stubs(:current_user).returns(User.new)
-  end
-
-  it "index action should render index template" do
-    get :index
-    response.should render_template(:index)
+    @user = User.new
+    @controller.stubs(:current_user).returns(@user)
   end
 
   it "show action should render show template" do
@@ -34,6 +30,7 @@ describe TweetsController do
     post :create
     response.should redirect_to(tweet_url(assigns[:tweet]))
   end
+
 
   it "destroy action should destroy model and redirect to index action" do
     tweet = Tweet.first

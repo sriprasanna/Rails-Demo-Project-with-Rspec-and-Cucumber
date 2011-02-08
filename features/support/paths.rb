@@ -10,8 +10,18 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /the new profile page/
+      new_profile_path
+
+    when /the new tweet page/
+      new_tweet_path
+
     when /the new login page/
       new_login_path
+
+    when /the user profile page/
+      Tweet.create!(:user => User.first, :text => "this is a tweet")
+      user_path(User.first)
 
 
     # Add more mappings here.

@@ -1,0 +1,19 @@
+%dl
+  %dt
+    Username
+  %dd
+    = @user.username
+  %dt
+    Email
+  %dd
+    = @user.email
+  %dt
+
+  %dd
+    = link_to toggle_follow_user_path(@user) do
+      = Follow.exists?(:user_id => @user.id, :follower_id => current_user.id) ? "Unfollow" : "Follow"
+
+%ul
+  - @tweets.each do |tweet|
+    %li
+      = tweet.text

@@ -1,0 +1,9 @@
+= form_for Tweet.new do |f|
+  = f.text_area :text
+  = f.submit
+
+%ol
+  - @tweets.each do |tweet|
+    %li= tweet.text
+
+= will_paginate @tweets 
